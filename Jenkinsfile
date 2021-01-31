@@ -4,7 +4,7 @@ pipeline {
         steps {
             git branch: 'master',
                 credentialsId: 'git_credentail',
-                url: 'https://github.com/hokkkk/mg-gate.git'
+                url: 'https://github.com/hokkkk/my-pipeline.git'
         }
 
     }
@@ -18,20 +18,10 @@ pipeline {
          }
      }
 
-     stage ('Testing Stage') {
-
-         steps {
-             with(maven : 'maven_3_5_0') {
-                 sh 'mvn test'
-             }
-         }
-     }
-
-
-     stage ('Deployment Stage') {
+     stage ('Running Stage') {
          steps {
                  withMaven(maven : 'maven_3_5_0') {
-                     sh 'mvn deploy'
+                     sh 'mvn spring-boot:run'
                  }
              }
          }
